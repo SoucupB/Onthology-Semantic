@@ -1,8 +1,10 @@
-# Semantic tokens sample
-
-This is an extension sample showing a very simple semantic tokens provider. This semantic tokens provider always returns all the tokens in a file.
-
-For more background on semantic highlighting read [here](https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide)
+# Racer code coloring Extension
+Welcome to the racer code coloring extension test.
+This repository contain a short demo for a code coloring extension
+dedicated to racer onthology coders. 
+Besides code coloring feature it also comes with a semantic checker to
+check if the predefined functions have the correct number of parameters (and other correction
+checks as well).
 
 ![Screenshot](demo.png)
 
