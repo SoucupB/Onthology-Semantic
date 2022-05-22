@@ -13,14 +13,3 @@ export function _isAlpha(ch){
 export function _isDigit(ch) {
   return ch >= '0' && ch <= '9';
 }
-
-export function _isLanguageRelatedCharacter(chr) {
-  let relatedChars = ";-_/+-*()[]";
-  if(_isAlpha(chr)) {
-    return true;
-  }
-  if(_isDigit(chr)) {
-    return true;
-  }
-  return relatedChars.indexOf(`${chr}`, relatedChars) !== -1;
-}
