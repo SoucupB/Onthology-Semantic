@@ -6,7 +6,7 @@
 (concept-instances B)
 
 (implies a (or B C))
-(implies A (some r C))
+(implies (some r C) (some r C))
 
 (disjoint a A)
 
@@ -14,5 +14,5 @@
 
 (concept-instances r)
 
-(implies v b)
+(implies cocoJanbon b)
 
