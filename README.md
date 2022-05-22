@@ -19,7 +19,8 @@ A GIF example
 You must have the <code>visual studio code</code> editor in order for this project to work.
 Clone this repository into your local machine.
 Download and install <code>nodejs</code>.
-Install npm library manager aswell as <code>typescript</code> and then
+Install npm library manager aswell as <code>typescript</code>.
+Write the command <code>npm i</code> in your terminal/cmd.
 press <code>F5</code>
 
 # Notes
