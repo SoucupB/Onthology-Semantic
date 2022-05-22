@@ -98,49 +98,56 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 		return 0;
 	}
 
-	private _astToColors(ast: cl.OnthologyObject[]): IParsedToken[] {
-		const colors = {
-			"implies": "string",
-			"set": "number"
-		}
-		const response: IParsedToken[] = [];
-		for(let i = 0; i < ast.length; i++) {
-
-		}
-		return response;
-	}
-
 	private _parseText(text: string): IParsedToken[] {
 		const r: IParsedToken[] = [];
 		let nnIndex = [0]
 		let ast = pl.parser_CreateAST(text, nnIndex);
-		if(ast) {
-			const colors = {
-				"implies": "string",
-				"set": "number"
-			}
-			const arrColors = pl.parser_FindInfos(ast, colors);
-			for(let i = 0; i < arrColors.length; i++) {
-				console.log(arrColors[i].offset, arrColors[i].len, arrColors[i].type, text.substr(arrColors[i].offset, arrColors[i].len))
-			}
+		const colors = {
+			"implies": "typeParameter",
+			"concept-instances": "typeParameter",
+			"set": "number",
+			"disjoint": "typeParameter",
+			"or": "string",
+			"some": "string",
+			"instance": "typeParameter",
+			"full-reset": "property"
 		}
-		let index = text.indexOf("implies");
+		const arrColors = pl.parser_FindInfos(ast, colors);
+		// for(let i = 0; i < arrColors.length; i++) {
+		// 	console.log(arrColors[i].offset, arrColors[i].len, arrColors[i].type, text.substr(arrColors[i].offset, arrColors[i].len))
+		// }
 		let newLines = this._findAllNewlines(text);	
-		while(index !== -1) {
-			let theNewLine = this._findLine(index, newLines);
-			let lineIndex = this._findLineIndex(index, newLines);
 
+		for(let i = 0; i < arrColors.length; i++) {
+			let theNewLine = this._findLine(arrColors[i].offset, newLines);
+	  	let lineIndex = this._findLineIndex(arrColors[i].offset, newLines);
 			r.push(
 				{
 					line: lineIndex + 1,
-					startCharacter: index - theNewLine - 1,
-					length: "implies".length,
-					tokenType: "typeParameter",
+					startCharacter: arrColors[i].offset - theNewLine - 1,
+					length: arrColors[i].len,
+					tokenType: arrColors[i].type,
 					tokenModifiers: []
 				}
 			);
-			index = text.indexOf("implies", index + 1)
 		}
+		// let index = text.indexOf("implies");
+		// let newLines = this._findAllNewlines(text);	
+		// while(index !== -1) {
+		// 	let theNewLine = this._findLine(index, newLines);
+		// 	let lineIndex = this._findLineIndex(index, newLines);
+
+		// 	r.push(
+		// 		{
+		// 			line: lineIndex + 1,
+		// 			startCharacter: index - theNewLine - 1,
+		// 			length: "implies".length,
+		// 			tokenType: "typeParameter",
+		// 			tokenModifiers: []
+		// 		}
+		// 	);
+		// 	index = text.indexOf("implies", index + 1)
+		// }
 		return r;
 	}
 	

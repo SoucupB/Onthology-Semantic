@@ -8,5 +8,7 @@
 
 (disjoint a A)
 
+(implies B (some G T))
+
 (concept-instances r)
 
