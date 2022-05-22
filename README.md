@@ -10,19 +10,9 @@ checks as well).
 
 ## How to run
 
-Launch the extension and open the file `sample/sample.semanticLanguage` and use the following settings:
+Clone this repository into your local machine.
+Download and install nodejs.
+Install npm library manager aswell as typescript.
+Press F5
 
-```jsonc
-"editor.semanticTokenColorCustomizations": {
-	"enabled": true, // enable for all themes
-	"rules": {
-		"*.static": {
-			"foreground": "#ff0000",
-			"fontStyle": "bold"
-		},
-		"type": {
-			"foreground": "#00aa00"
-		}
-	}
-}
-```
+
