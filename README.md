@@ -11,8 +11,8 @@ checks as well).
 ## How to run
 
 Clone this repository into your local machine.
-Download and install nodejs.
-Install npm library manager aswell as typescript.
-Press F5
+Download and install <code>nodejs</code>.
+Install npm library manager aswell as <code>typescript</code>.
+Press <code>F5</code>
 
 
