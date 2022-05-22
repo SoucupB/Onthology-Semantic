@@ -113,21 +113,17 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 			"concept-instances": "typeParameter",
 			"set": "number",
 			"disjoint": "typeParameter",
-			"or": "string",
-			"some": "string",
+			"or": "class",
+			"some": "class",
 			"instance": "typeParameter",
 			"full-reset": "typeParameter"
 		}
 		const arrColors = pl.parser_FindInfos(ast, colors);
-		// for(let i = 0; i < arrColors.length; i++) {
-		// 	console.log(arrColors[i].offset, arrColors[i].len, arrColors[i].type, text.substr(arrColors[i].offset, arrColors[i].len))
-		// }
 		let newLines = this._findAllNewlines(text);	
 
 		for(let i = 0; i < arrColors.length; i++) {
 			let theNewLine = this._findLine(arrColors[i].offset, newLines);
 	  	let lineIndex = this._findLineIndex(arrColors[i].offset, newLines);
-			//console.log("AAAA", lineIndex + 1, theNewLine, arrColors[i].offset, arrColors[i].offset - theNewLine - 1);
 			r.push(
 				{
 					line: lineIndex + 1,
@@ -138,56 +134,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 				}
 			);
 		}
-		// let index = text.indexOf("implies");
-		// let newLines = this._findAllNewlines(text);	
-		// while(index !== -1) {
-		// 	let theNewLine = this._findLine(index, newLines);
-		// 	let lineIndex = this._findLineIndex(index, newLines);
-
-		// 	r.push(
-		// 		{
-		// 			line: lineIndex + 1,
-		// 			startCharacter: index - theNewLine - 1,
-		// 			length: "implies".length,
-		// 			tokenType: "typeParameter",
-		// 			tokenModifiers: []
-		// 		}
-		// 	);
-		// 	index = text.indexOf("implies", index + 1)
-		// }
 		return r;
 	}
-	
-
-	// private _parseText(text: string): IParsedToken[] {
-	// 	const r: IParsedToken[] = [];
-	// 	const lines = text.split(/\r\n|\r|\n/);
-	// 	console.log("Vasile")
-	// 	for (let i = 0; i < lines.length; i++) {
-	// 		const line = lines[i];
-	// 		let currentOffset = 0;
-	// 		do {
-	// 			const openOffset = line.indexOf('[', currentOffset);
-	// 			if (openOffset === -1) {
-	// 				break;
-	// 			}
-	// 			const closeOffset = line.indexOf(']', openOffset);
-	// 			if (closeOffset === -1) {
-	// 				break;
-	// 			}
-	// 			const tokenData = this._parseTextToken(line.substring(openOffset + 1, closeOffset));
-	// 			r.push({
-	// 				line: i,
-	// 				startCharacter: openOffset + 1,
-	// 				length: closeOffset - openOffset - 1,
-	// 				tokenType: tokenData.tokenType,
-	// 				tokenModifiers: tokenData.tokenModifiers
-	// 			});
-	// 			currentOffset = closeOffset;
-	// 		} while (true);
-	// 	}
-	// 	return r;
-	// }
 
 	private _parseTextToken(text: string): { tokenType: string; tokenModifiers: string[]; } {
 		const parts = text.split('.');
