@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as pl from "./Parser";
+import * as cl from "./ClassAST";
 
 const tokenTypes = new Map<string, number>();
 const tokenModifiers = new Map<string, number>();
@@ -161,3 +162,5 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 		};
 	}
 }
+
+cl.class_Init();

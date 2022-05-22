@@ -62,15 +62,15 @@ const SpecialKeys = [
     }
   },
   {
-    name: '\n',
+    name: '\r\n',
     func: (chr) => {
-      return chr =='\n';
+      return chr == '\r' || chr == '\n';
     }
   },
   {
     name: '\t',
     func: (chr) => {
-      return chr =='\t';
+      return chr == '\t';
     }
   }
 ]

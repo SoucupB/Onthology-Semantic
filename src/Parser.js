@@ -27,14 +27,12 @@ function parser_GetCurrentNode_t(allTokens, index, shouldCloseParanth = false) {
   if(!currentNode) {
     return null;
   }
-
   index[0]++;
 
   while(index[0] < allTokens.length && clss.class_GetEnumValue(allTokens[index[0]]) == clss.class_GetEnumValue('separators')) {
     currentNode.addChild(new clss.OnthologyObject(allTokens[index[0]]))
     index[0]++;
   }
-
   switch(currentNode.type) {
 
     case clss.class_GetEnumValue(')'): {
@@ -129,6 +127,7 @@ function parser_GetCurrentNode_t(allTokens, index, shouldCloseParanth = false) {
       break;
     }
   }
+  
   return currentNode;
 }
 
