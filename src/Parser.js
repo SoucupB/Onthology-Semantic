@@ -28,9 +28,9 @@ function parser_GetCurrentNode_t(allTokens, index, shouldCloseParanth = false) {
     return null;
   }
   index[0]++;
-
   while(index[0] < allTokens.length && clss.class_GetEnumValue(allTokens[index[0]]) == clss.class_GetEnumValue('separators')) {
-    currentNode.addChild(new clss.OnthologyObject(allTokens[index[0]]))
+    const separators = new clss.OnthologyObject(allTokens[index[0]]);
+    currentNode.addChild(separators)
     index[0]++;
   }
   switch(currentNode.type) {
@@ -161,8 +161,4 @@ export function parser_CreateAST(code, parsedIndex) {
 
 function parser_Init() {
 
-}
-
-export function something(a, b) {
-  return a + b;
 }

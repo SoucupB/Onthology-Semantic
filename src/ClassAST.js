@@ -100,7 +100,7 @@ export class OnthologyObject {
 }
 
 export function class_GetEnumValue(enumVal) {
-  if(' \n\t'.indexOf(enumVal) != -1) {
+  if(' \r\n\t'.indexOf(enumVal) != -1) {
     return componentsEnum['separators']
   }
 
