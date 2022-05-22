@@ -2,7 +2,7 @@
 Welcome to the racer code coloring extension test.
 This repository contain a short demo for a code coloring extension
 dedicated to racer onthology coders. 
-Besides code coloring extension it also comes with a semantic checker to
+Besides code coloring feature it also comes with a semantic checker to
 check if the predefined functions have the corect number of parameters (and other correction
 checks as well).
 
