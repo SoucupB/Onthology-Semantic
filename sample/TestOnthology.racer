@@ -1,3 +1,5 @@
+(instance (or Bsdsf C) (or B C))
+
 (full-reset)
 (implies A B)
 (instance b A)
@@ -11,4 +13,6 @@
 (implies B (some G T))
 
 (concept-instances r)
+
+(implies v b)
 

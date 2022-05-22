@@ -78,6 +78,9 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 
 	private _findLine(index: number, newLines: number[]): number {
 		let currentIndex = 0;
+		if(newLines.length && newLines[currentIndex] > index) {
+			return -1;
+		}
 		while(currentIndex < newLines.length) {
 			if(currentIndex && newLines[currentIndex] > index) {
 				return newLines[currentIndex - 1];
@@ -89,6 +92,9 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 
 	private _findLineIndex(index: number, newLines: number[]): number {
 		let currentIndex = 0;
+		if(newLines.length && newLines[currentIndex] > index) {
+			return -1;
+		}
 		while(currentIndex < newLines.length) {
 			if(currentIndex && newLines[currentIndex] > index) {
 				return currentIndex - 1;
@@ -110,7 +116,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 			"or": "string",
 			"some": "string",
 			"instance": "typeParameter",
-			"full-reset": "property"
+			"full-reset": "typeParameter"
 		}
 		const arrColors = pl.parser_FindInfos(ast, colors);
 		// for(let i = 0; i < arrColors.length; i++) {
@@ -121,6 +127,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 		for(let i = 0; i < arrColors.length; i++) {
 			let theNewLine = this._findLine(arrColors[i].offset, newLines);
 	  	let lineIndex = this._findLineIndex(arrColors[i].offset, newLines);
+			//console.log("AAAA", lineIndex + 1, theNewLine, arrColors[i].offset, arrColors[i].offset - theNewLine - 1);
 			r.push(
 				{
 					line: lineIndex + 1,
