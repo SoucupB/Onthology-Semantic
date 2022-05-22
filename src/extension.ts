@@ -112,7 +112,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 					line: lineIndex + 1,
 					startCharacter: index - theNewLine - 1,
 					length: "implies".length,
-					tokenType: "string",
+					tokenType: "typeParameter",
 					tokenModifiers: []
 				}
 			);
