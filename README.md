@@ -8,6 +8,7 @@ checks as well).
 
 ![Screenshot](CodeColoring.png)
 
+![ Alt text](capture.gif)
 ## How to run
 
 Clone this repository into your local machine.
