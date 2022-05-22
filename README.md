@@ -6,7 +6,7 @@ Besides code coloring feature it also comes with a semantic checker to
 check if the predefined functions have the correct number of parameters (and other correction
 checks as well).
 
-![Screenshot](demo.png)
+![Screenshot](CodeColoring.png)
 
 ## How to run
 
