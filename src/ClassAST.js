@@ -1,3 +1,5 @@
+import * as tk from "./TokensFunctions"
+
 var componentsEnum = {};
 var onthologyArray = [];
 const Components = [
@@ -43,14 +45,14 @@ const ComponentsChildren = {
   ]
 }
 
-function _enumConstruct() {
+export function _enumConstruct() {
   let index = 1;
   Components.forEach((element) => function(element) {
     componentsEnum[element] = index++;
   }(element))
 }
 
-class OnthologyObject {
+export class OnthologyObject {
   constructor(type) {
     this.name = type;
     this.type = class_GetEnumValue(type);
@@ -97,7 +99,7 @@ class OnthologyObject {
 
 }
 
-function class_GetEnumValue(enumVal) {
+export function class_GetEnumValue(enumVal) {
   if(' \n\t'.indexOf(enumVal) != -1) {
     return componentsEnum['separators']
   }
@@ -108,50 +110,23 @@ function class_GetEnumValue(enumVal) {
   return null
 }
 
-function class_AddToOnthologyArray(element) {
+export function class_AddToOnthologyArray(element) {
   onthologyArray.push(element)
 }
 
-function _isSmallAlpha(ch: string) {
-  return ch >= 'a' && ch <= 'z';
-}
-
-function _isBigAlpha(ch: string) {
-  return ch >= 'A' && ch <= 'Z';
-}
-
-function _isAlpha(ch: string){
-  return _isSmallAlpha(ch) || _isBigAlpha(ch);
-}
-
-function _isDigit(ch: string) {
-  return ch >= '0' && ch <= '9';
-}
-
-function _isLanguageRelatedCharacter(chr) {
-  let relatedChars = ";-_/+-*()[]";
-  if(_isAlpha(chr)) {
-    return true;
-  }
-  if(_isDigit(chr)) {
-    return true;
-  }
-  return relatedChars.indexOf(`${chr}`, relatedChars) !== -1;
-}
-
-function class_GetToken(code: string, index: number[]) {
-  let token = token_GetCurrentToken(code, index);
+export function class_GetToken(code, index) {
+  let token = tk.token_GetCurrentToken(code, index);
   if(token) {
     return token;
   }
   return null;
 }
 
-function class_Init() {
+export function class_Init() {
   _enumConstruct();
 }
 
-function class_ToString_t(node, stre) {
+export function class_ToString_t(node, stre) {
   stre[0] += `${node.displayName}`;
   for(let i = 0; i < node.children.length; i++) {
     class_ToString_t(node.children[i], stre)
@@ -161,7 +136,7 @@ function class_ToString_t(node, stre) {
   }
 }
 
-function class_EmbedName_t(node, styleMap) {
+export function class_EmbedName_t(node, styleMap) {
   if(!node) {
     return ;
   }
@@ -185,11 +160,11 @@ function class_EmbedName_t(node, styleMap) {
   }
 }
 
-function class_EmbedName(node, styleMap) {
+export function class_EmbedName(node, styleMap) {
   class_EmbedName_t(node, styleMap);
 }
 
-function class_ToString(node) {
+export function class_ToString(node) {
   let strResponse = ['']
   if(node.type != class_GetEnumValue('root-node')) {
     return '';
@@ -201,7 +176,7 @@ function class_ToString(node) {
   return strResponse[0];
 }
 
-function class_NodeSize(node) {
+export function class_NodeSize(node) {
   if(!node) {
     return 0;
   }

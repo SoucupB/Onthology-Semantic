@@ -1,9 +1,5 @@
 (full-reset)
 
-
-
-
-
 (implies A B)
 (instance b A)
 (concept-instances B)

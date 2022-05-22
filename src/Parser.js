@@ -12,39 +12,39 @@
 (concept-instances r)
 */
 
+import * as clss from './ClassAST';
 
-function parser_GetCurrentNode(allTokens: string[], index: number[]) {
+function parser_GetCurrentNode(allTokens, index) {
   return parser_GetCurrentNode_t(allTokens, index);
 }
 
 
-function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldCloseParanth = false) {
+function parser_GetCurrentNode_t(allTokens, index, shouldCloseParanth = false) {
   if(index[0] >= allTokens.length) {
     return null;
   }
-
-  let currentNode = new OnthologyObject(allTokens[index[0]]);
+  let currentNode = new clss.OnthologyObject(allTokens[index[0]]);
   if(!currentNode) {
     return null;
   }
 
   index[0]++;
 
-  while(index[0] < allTokens.length && class_GetEnumValue(allTokens[index[0]]) == class_GetEnumValue('separators')) {
-    currentNode.addChild(new OnthologyObject(allTokens[index[0]]))
+  while(index[0] < allTokens.length && clss.class_GetEnumValue(allTokens[index[0]]) == clss.class_GetEnumValue('separators')) {
+    currentNode.addChild(new clss.OnthologyObject(allTokens[index[0]]))
     index[0]++;
   }
 
   switch(currentNode.type) {
 
-    case class_GetEnumValue(')'): {
+    case clss.class_GetEnumValue(')'): {
       if(!shouldCloseParanth) {
         return null;
       }
       break;
     }
 
-    case class_GetEnumValue('instance'): {
+    case clss.class_GetEnumValue('instance'): {
       let left = parser_GetCurrentNode_t(allTokens, index);
       let right = parser_GetCurrentNode_t(allTokens, index)
       if(!currentNode.isCompatible(left) || !currentNode.isCompatible(right)) {
@@ -55,7 +55,7 @@ function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldClo
       break;
     }
 
-    case class_GetEnumValue('or'): {
+    case clss.class_GetEnumValue('or'): {
       let left = parser_GetCurrentNode_t(allTokens, index);
       let right = parser_GetCurrentNode_t(allTokens, index);
       if(!currentNode.isCompatible(left) || !currentNode.isCompatible(right)) {
@@ -66,7 +66,7 @@ function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldClo
       break;
     }
 
-    case class_GetEnumValue('some'): {
+    case clss.class_GetEnumValue('some'): {
       let left = parser_GetCurrentNode_t(allTokens, index);
       let right = parser_GetCurrentNode_t(allTokens, index)
       if(!currentNode.isCompatible(left) || !currentNode.isCompatible(right)) {
@@ -77,7 +77,7 @@ function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldClo
       break;
     }
 
-    case class_GetEnumValue('disjoint'): {
+    case clss.class_GetEnumValue('disjoint'): {
       let left = parser_GetCurrentNode_t(allTokens, index);
       let right = parser_GetCurrentNode_t(allTokens, index)
       if(!currentNode.isCompatible(left) || !currentNode.isCompatible(right)) {
@@ -88,7 +88,7 @@ function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldClo
       break;
     }
 
-    case class_GetEnumValue('concept-instances'): {
+    case clss.class_GetEnumValue('concept-instances'): {
       let nextChild = parser_GetCurrentNode_t(allTokens, index)
       if(!currentNode.isCompatible(nextChild)) {
         return null;
@@ -97,24 +97,24 @@ function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldClo
       break;
     }
 
-    case class_GetEnumValue('full-reset'): {
+    case clss.class_GetEnumValue('full-reset'): {
       break;
     }
 
-    case class_GetEnumValue('('): {
+    case clss.class_GetEnumValue('('): {
       let currentElement = parser_GetCurrentNode_t(allTokens, index);
       if(!currentElement) {
         return null;
       }
       currentNode.addChild(currentElement)
       let closeParanthNode = parser_GetCurrentNode_t(allTokens, index, true);
-      if(!closeParanthNode || closeParanthNode.type != class_GetEnumValue(')')) {
+      if(!closeParanthNode || closeParanthNode.type != clss.class_GetEnumValue(')')) {
         return null;
       }
       currentNode.addComplementary(closeParanthNode);
       break;
     }
-    case class_GetEnumValue('implies'): {
+    case clss.class_GetEnumValue('implies'): {
       let left = parser_GetCurrentNode_t(allTokens, index);
       let right = parser_GetCurrentNode_t(allTokens, index)
       if(!currentNode.isCompatible(left) || !currentNode.isCompatible(right)) {
@@ -132,28 +132,27 @@ function parser_GetCurrentNode_t(allTokens: string[], index: number[], shouldClo
   return currentNode;
 }
 
-function parser_CreateAST(code: string, parsedIndex: number[]) {
+export function parser_CreateAST(code, parsedIndex) {
   if(!code) {
     return null;
   }
-
   let index = [0];
   let allTokens = [];
-  let resp = class_GetToken(code, index);
+  let resp = clss.class_GetToken(code, index);
   let astArray = [];
   while(resp) {
     allTokens.push(resp);
-    resp = class_GetToken(code, index);
+    resp = clss.class_GetToken(code, index);
   }
   let cIndex = [0]
   let node = parser_GetCurrentNode(allTokens, cIndex)
   while(node) {
     astArray.push(node);
-    parsedIndex[0] += class_NodeSize(node)
+    parsedIndex[0] += clss.class_NodeSize(node)
     node = parser_GetCurrentNode(allTokens, cIndex)
   }
 
-  let parentNode = new OnthologyObject('root-node');
+  let parentNode = new clss.OnthologyObject('root-node');
   for(let i = 0; i < astArray.length; i++) {
     parentNode.addChild(astArray[i])
   }
@@ -163,4 +162,8 @@ function parser_CreateAST(code: string, parsedIndex: number[]) {
 
 function parser_Init() {
 
+}
+
+export function something(a, b) {
+  return a + b;
 }
