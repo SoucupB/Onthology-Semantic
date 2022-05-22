@@ -100,24 +100,24 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 	private _parseText(text: string): IParsedToken[] {
 		const r: IParsedToken[] = [];
 		
-		let index = text.indexOf("implies");
-		let newLines = this._findAllNewlines(text);
-		while(index !== -1) {
-			let theNewLine = this._findLine(index, newLines);
-			let lineIndex = this._findLineIndex(index, newLines);
+		// let index = text.indexOf("implies");
+		// let newLines = this._findAllNewlines(text);
+		// while(index !== -1) {
+		// 	let theNewLine = this._findLine(index, newLines);
+		// 	let lineIndex = this._findLineIndex(index, newLines);
 
-			console.log(lineIndex + 1, index - theNewLine - 1)
-			r.push(
-				{
-					line: lineIndex + 1,
-					startCharacter: index - theNewLine - 1,
-					length: "implies".length,
-					tokenType: "typeParameter",
-					tokenModifiers: []
-				}
-			);
-			index = text.indexOf("implies", index + 1)
-		}
+		// 	console.log(lineIndex + 1, index - theNewLine - 1)
+		// 	r.push(
+		// 		{
+		// 			line: lineIndex + 1,
+		// 			startCharacter: index - theNewLine - 1,
+		// 			length: "implies".length,
+		// 			tokenType: "typeParameter",
+		// 			tokenModifiers: []
+		// 		}
+		// 	);
+		// 	index = text.indexOf("implies", index + 1)
+		// }
 		return r;
 	}
 	
