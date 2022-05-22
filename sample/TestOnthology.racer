@@ -1,21 +1,22 @@
+
 (full-reset)
 
-(instance (or (or V G) C) (or B C))
+(instance T V)
 
 (implies A B)
 (instance b A)
 (concept-instances B)
 
 (implies a (or B C))
-(implies (some r C) (some r C))
+(implies G (some r C))
 
 (disjoint a A)
 
-(implies (or v G) (some G T))
+(implies A (some G T))
 
 (concept-instances r)
 
-(implies cocoJanbon b)
-
-(implies asVreaMeara b)
+(implies A ( implies T f ) )
+(implies B T)
+(instance C F)
 
