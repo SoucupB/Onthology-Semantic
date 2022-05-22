@@ -22,11 +22,10 @@ Download and install <code>nodejs</code>.
 Install npm library manager aswell as <code>typescript</code> and then
 press <code>F5</code>
 
-# Notes
+# Disclaimer
 
 This is only a demo, so the coloring only works for several functions, if you want to add more to make it better
-you can download the repository and add them yourself and then do a pull request in case you want for everybody
-to see your work.
+you can download the repository and add them yourself and then do a pull request in case you want you want to share it.
 
 The repository which this project was built on is:
 https://github.com/microsoft/vscode-extension-samples
