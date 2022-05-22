@@ -1,0 +1,17 @@
+(full-reset)
+
+
+
+
+
+(implies A B)
+(instance b A)
+(concept-instances B)
+
+(implies a (or B C))
+(implies A (some r C))
+
+(disjoint a A)
+
+(concept-instances r)
+
