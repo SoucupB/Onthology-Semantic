@@ -136,6 +136,15 @@ export function class_ToString_t(node, stre) {
   }
 }
 
+export function class_GetTokenNameByIndex(index) {
+  for(const [key, value] of Object.entries(componentsEnum)) {
+    if(value == index) {
+      return key;
+    }
+  }
+  return null;
+}
+
 export function class_EmbedName_t(node, styleMap) {
   if(!node) {
     return ;
@@ -185,5 +194,13 @@ export function class_NodeSize(node) {
     sz += class_NodeSize(node.children[i]);
   }
   sz += class_NodeSize(node.complementary);
+  return sz;
+}
+
+export function class_NodeSizeWoComp(node) {
+  if(!node) {
+    return 0;
+  }
+  let sz = node.name.length;
   return sz;
 }

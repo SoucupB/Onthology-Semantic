@@ -162,3 +162,33 @@ export function parser_CreateAST(code, parsedIndex) {
 function parser_Init() {
 
 }
+
+export function parser_FindInfos_t(ast, config, index, response) {
+  if(!ast) {
+    return ;
+  }
+  const currentKey = clss.class_GetTokenNameByIndex(ast.type);
+  if(currentKey in config) {
+    response.push({
+      offset: index[0],
+      len: ast.name.length,
+      type: config[currentKey]
+    })
+  }
+  index[0] += clss.class_NodeSizeWoComp(ast);
+  parser_FindInfos_d(ast.children, index, response, config);
+  parser_FindInfos_t(ast.complementary, config, index, response);
+}
+
+export function parser_FindInfos(asts, config) {
+  let response = []
+  let index = [0]
+  parser_FindInfos_d(asts.children, index, response, config);
+  return response;
+}
+
+export function parser_FindInfos_d(asts, index, response, config) {
+  for(let i = 0; i < asts.length; i++) {
+    parser_FindInfos_t(asts[i], config, index, response);
+  }
+}

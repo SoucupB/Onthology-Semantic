@@ -98,18 +98,32 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 		return 0;
 	}
 
-	private _astToColors() {
-		let colors = {
+	private _astToColors(ast: cl.OnthologyObject[]): IParsedToken[] {
+		const colors = {
 			"implies": "string",
 			"set": "number"
 		}
+		const response: IParsedToken[] = [];
+		for(let i = 0; i < ast.length; i++) {
+
+		}
+		return response;
 	}
 
 	private _parseText(text: string): IParsedToken[] {
 		const r: IParsedToken[] = [];
 		let nnIndex = [0]
-		
-		console.log(pl.parser_CreateAST(text, nnIndex))
+		let ast = pl.parser_CreateAST(text, nnIndex);
+		if(ast) {
+			const colors = {
+				"implies": "string",
+				"set": "number"
+			}
+			const arrColors = pl.parser_FindInfos(ast, colors);
+			for(let i = 0; i < arrColors.length; i++) {
+				console.log(arrColors[i].offset, arrColors[i].len, arrColors[i].type, text.substr(arrColors[i].offset, arrColors[i].len))
+			}
+		}
 		let index = text.indexOf("implies");
 		let newLines = this._findAllNewlines(text);	
 		while(index !== -1) {
